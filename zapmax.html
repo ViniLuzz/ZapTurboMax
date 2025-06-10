@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zap Turbo Max - Automatize suas vendas no WhatsApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .bg-gradient-zap {
+            background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+        }
+        .btn-primary {
+            background-color: #f59e0b;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #ecfdf5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10b981;
+            font-size: 24px;
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        .faq-item {
+            margin-bottom: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .faq-question {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.active {
+            max-height: 300px;
+        }
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.3);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-white text-lg">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fab fa-whatsapp text-3xl text-green-600"></i>
+                <h1 class="text-xl font-bold text-gray-800">Zap Turbo <span class="text-emerald-600">Max</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#benefits" class="text-gray-600 hover:text-emerald-600 transition">Benefícios</a>
+                <a href="#how" class="text-gray-600 hover:text-emerald-600 transition">Como Funciona</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-emerald-600 transition">Depoimentos</a>
+                <a href="#faq" class="text-gray-600 hover:text-emerald-600 transition">Dúvidas</a>
+            </nav>
+            <a href="#offer" class="hidden md:block px-6 py-2 btn-primary text-white font-semibold rounded-full transition duration-300 hover:shadow-lg">Quero Automatizar</a>
+            <button class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-zap text-white">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">🚀 Aumente suas vendas no WhatsApp de forma automática!</h1>
+                    <p class="text-2xl mb-8 opacity-90">Atenda clientes 24h, capture leads e converta em vendas com o sistema mais rápido e fácil de usar.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#offer" class="w-full sm:w-auto px-8 py-4 btn-primary text-white font-bold rounded-full text-center transition duration-300 transform hover:scale-105 text-xl">Quero Automatizar meu WhatsApp</a>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-2">
+                        <div class="flex -space-x-2">
+                            <img src="https://randomuser.me/api/portraits/women/1.jpg" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            <img src="https://randomuser.me/api/portraits/men/1.jpg" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            <img src="https://randomuser.me/api/portraits/women/2.jpg" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                        </div>
+                        <p class="text-sm opacity-80">+5.000 usuários satisfeitos</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="relative max-w-md mx-auto">
+                        <div class="absolute -bottom-6 -left-6 w-64 h-64 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+                        <div class="absolute -top-6 -right-6 w-64 h-64 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+                        <img src="https://media.atomicatpages.net/u/iGyd6hu0iNXhePcFAUAJHUrur6L2/l/iQwnYa9747523.png" alt="App Mockup" class="relative z-10 w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos Section -->
+    <section class="py-8 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <p class="text-center text-gray-500 mb-8">Utilizado por empresas de vários segmentos:</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <div class="w-24 h-12 flex items-center justify-center">
+                    <i class="fas fa-store text-3xl text-gray-400"></i>
+                </div>
+                <div class="w-24 h-12 flex items-center justify-center">
+                    <i class="fas fa-hand-holding-medical text-3xl text-gray-400"></i>
+                </div>
+                <div class="w-24 h-12 flex items-center justify-center">
+                    <i class="fas fa-chart-line text-3xl text-gray-400"></i>
+                </div>
+                <div class="w-24 h-12 flex items-center justify-center">
+                    <i class="fas fa-headset text-3xl text-gray-400"></i>
+                </div>
+                <div class="w-24 h-12 flex items-center justify-center">
+                    <i class="fas fa-gem text-3xl text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience Section -->
+    <section class="py-16 bg-emerald-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Para quem indicamos o <span class="text-emerald-600">Zap Turbo Max</span>?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A solução perfeita para diferentes profissionais que precisam vender todos os dias</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Consultant Card -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition h-full">
+                    <div class="feature-icon mb-4 bg-blue-100 text-blue-600">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">CONSULTORES EM GERAL</h3>
+                    <p class="text-gray-600">Para consultores de vendas e corretores, mantenha contato rápido e eficaz com tecnologia que simula digitação e áudios humanos, conectando-se com dezenas de leads simultaneamente.</p>
+                </div>
+                
+                <!-- Sales Card -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition h-full">
+                    <div class="feature-icon mb-4 bg-yellow-100 text-yellow-600">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">VENDEDORES</h3>
+                    <p class="text-gray-600">Mantenha comunicação ágil com clientes através de mensagens automatizadas que simulam comportamento humano, otimizando tempo e aumentando conversões.</p>
+                </div>
+                
+                <!-- Traffic Manager Card -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition h-full">
+                    <div class="feature-icon mb-4 bg-purple-100 text-purple-600">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">GESTORES DE TRÁFEGO</h3>
+                    <p class="text-gray-600">Transforme cliques em conversas com automação inteligente que inicia diálogos personalizados imediatamente após a geração do lead.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Por que usar o <span class="text-emerald-600">Zap Turbo Max</span>?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">O sistema mais completo para automatizar seu WhatsApp e impulsionar suas vendas</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Atendimento automático 24h</h3>
+                    <p class="text-gray-600">Seu WhatsApp nunca mais fica offline. Atenda clientes a qualquer hora, mesmo enquanto você dorme.</p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Captação de leads sem esforço</h3>
+                    <p class="text-gray-600">Capture contatos automaticamente e construa sua lista de clientes em potencial sem trabalho manual.</p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Acompanhamento de métricas</h3>
+                    <p class="text-gray-600">Tenha insights valiosos sobre suas conversas, taxas de conversão e desempenho das mensagens.</p>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Organização com tags e filtros</h3>
+                    <p class="text-gray-600">Classifique clientes por interesse, estágio no funil de vendas e muito mais para atendimentos personalizados.</p>
+                </div>
+                
+                <!-- Benefit 5 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-funnel-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Vendas automáticas</h3>
+                    <p class="text-gray-600">Configure mensagens estratégicas que guiam o cliente pelo funil, aumentando suas chances de compra.</p>
+                </div>
+                
+                <!-- Benefit 6 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Ideal para vários negócios</h3>
+                    <p class="text-gray-600">Perfeito para afiliados, lojistas, prestadores de serviço, consultores e qualquer um que venda pelo WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before/After Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Antes <span class="text-emerald-600">Sem</span> / Depois <span class="text-emerald-600">Com</span> Zap Turbo Max</h2>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Before Column -->
+                <div class="md:w-1/2 p-6 bg-white rounded-xl shadow">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-times text-red-500 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Antes</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-red-500 mt-1 mr-3"></i>
+                            <span>Atendimento apenas quando você está disponível</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-red-500 mt-1 mr-3"></i>
+                            <span>Perda de clientes por demora no atendimento</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-red-500 mt-1 mr-3"></i>
+                            <span>Organização manual de contatos e mensagens</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-red-500 mt-1 mr-3"></i>
+                            <span>Dificuldade em mensurar resultados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-red-500 mt-1 mr-3"></i>
+                            <span>Estresse com atendimento simultâneo</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- After Column -->
+                <div class="md:w-1/2 p-6 bg-emerald-50 rounded-xl shadow transform hover:-translate-y-2 transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-check text-emerald-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Depois</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-600 mt-1 mr-3"></i>
+                            <span>Atendimento 24 horas automático em seu WhatsApp</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-600 mt-1 mr-3"></i>
+                            <span>Nunca mais perca uma venda por demora no atendimento</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-600 mt-1 mr-3"></i>
+                            <span>Contatos e mensagens organizados automaticamente</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-600 mt-1 mr-3"></i>
+                            <span>Relatórios completos para acompanhar resultados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-600 mt-1 mr-3"></i>
+                            <span>Tempo livre para focar no que realmente importa</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Quem já usa, <span class="text-emerald-600">recomenda</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Veja o que nossos clientes estão dizendo sobre o Zap Turbo Max</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Mariana Silva" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Mariana Silva</h4>
+                            <p class="text-sm text-gray-500">Loja de Cosméticos</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600 text-lg">"Minhas vendas aumentaram 70% depois que comecei a usar o Zap Turbo Max. Agora meus clientes são atendidos imediatamente, mesmo de madrugada!"</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="Carlos Oliveira" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Carlos Oliveira</h4>
+                            <p class="text-sm text-gray-500">Afiliado Digital</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600">"Como afiliado, o volume de mensagens era impossível de gerenciar sozinho. Com o Zap Turbo Max consigo qualificar leads automaticamente e fechar muito mais vendas."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Ana Paula Rocha" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Ana Paula Rocha</h4>
+                            <p class="text-sm text-gray-500">Consultora de Beleza</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-600">"Antes perdia muitos clientes por não conseguir responder a tempo. Agora tenho um assistente virtual que agenda consultas, envia lembretes e até faz upsell!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Como funciona o <span class="text-emerald-600">Zap Turbo Max</span>?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Configure em minutos e comece a automatizar suas vendas</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-3xl font-bold">1</div>
+                    <h3 class="text-xl font-semibold mb-3">Ative seu acesso</h3>
+                    <p class="text-gray-600 mb-6">Faça seu cadastro e receba acesso imediato à plataforma. Não precisa instalar nada - funciona direto no navegador.</p>
+                    <div class="flex justify-center">
+                        <div class="w-16 h-1 bg-emerald-200"></div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition transform md:-translate-y-4">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-3xl font-bold">2</div>
+                    <h3 class="text-xl font-semibold mb-3">Configure seu funil</h3>
+                    <p class="text-gray-600 mb-6">Use nossos templates ou crie fluxos personalizados com nosso suporte. Defina respostas automáticas, gatilhos e ações.</p>
+                    <div class="flex justify-center">
+                        <div class="w-16 h-1 bg-emerald-200"></div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm text-center hover:shadow-md transition">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-3xl font-bold">3</div>
+                    <h3 class="text-xl font-semibold mb-3">Deixe o robô trabalhar</h3>
+                    <p class="text-gray-600 mb-6">Pronto! Seu WhatsApp agora está 24/7 atendendo clientes, captando leads e vendendo automaticamente para você.</p>
+                    <div class="flex justify-center">
+                        <div class="w-16 h-1 bg-emerald-200"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="https://pay.kiwify.com.br/2uD6qHF?afid=ULCm5ddi" class="inline-block px-8 py-4 btn-primary text-white font-bold rounded-full transform hover:scale-105 transition">Quero Começar Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-emerald-50 rounded-xl p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                        <img src="https://media.atomicatpages.net/u/A4LBDUG0Y0MaMBz2kRyap84HSVH2/Pictures/xvhspw4693861.png" alt="7 dias de garantia" class="w-40 h-40 object-contain">
+                    </div>
+                    <div class="md:w-2/3 md:pl-8 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Garantia de Satisfação</h3>
+                        <p class="text-gray-600 mb-6">Oferecemos 7 dias de garantia incondicional. Se por qualquer motivo você não gostar do Zap Turbo Max, devolvemos seu dinheiro sem perguntas.</p>
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div>
+                                <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <p class="text-sm font-semibold">Suporte via WhatsApp</p>
+                            </div>
+                            <div>
+                                <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <p class="text-sm font-semibold">Pagamento Seguro</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Limited Offer Section -->
+    <section id="offer" class="py-16 bg-gradient-to-r from-amber-100 to-orange-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="inline-block px-4 py-2 bg-amber-500 text-white rounded-full mb-4 text-sm font-semibold">🔥 PROMOÇÃO POR TEMPO LIMITADO</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Adquira Agora o Zap Turbo Max com <span class="text-emerald-600">50% de Desconto</span>!</h2>
+                <p class="text-xl text-gray-700 mb-8">Automatize suas vendas no WhatsApp e comece a atender clientes 24h por dia, mesmo enquanto você dorme.</p>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8 max-w-2xl mx-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-600 line-through">De R$ 174,60</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm font-bold">50% OFF</span>
+                    </div>
+                    <div class="text-4xl font-bold text-gray-800 mb-2">12x de R$ 9,74*</div>
+                    <p class="text-gray-600 mb-6">ou R$ 97,00 à vista</p>
+                    <p class="text-sm text-gray-500 mb-4">1 ano completo de acesso às atualizações</p>
+                    
+                    <div class="mb-6">
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-emerald-600 h-2.5 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-600 mt-2">
+                            <span>20 vendidos</span>
+                            <span>Restam apenas 8 nesta oferta</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://pay.kiwify.com.br/2uD6qHF?afid=ULCm5ddi" class="block w-full px-6 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 text-lg">QUERO CLIENTES TODOS OS DIAS</a>
+                </div>
+                
+                <div class="flex flex-wrap justify-center items-center gap-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt text-emerald-600 mr-2"></i>
+                        <span class="text-sm">Pagamento 100% Seguro</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-lock text-emerald-600 mr-2"></i>
+                        <span class="text-sm">Dados protegidos</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-headset text-emerald-600 mr-2"></i>
+                        <span class="text-sm">Suporte Premium</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonus Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">E você ainda recebe <span class="text-emerald-600">2 bônus especiais</span>!</h2>
+                <p class="text-gray-600">Para acelerar ainda mais o seu resultado</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Bonus 1 -->
+                <div class="bg-gray-50 p-6 rounded-xl border border-emerald-100">
+                    <h3 class="text-xl font-bold text-emerald-600 mb-3">SEJA NOSSO SÓCIO</h3>
+                    <p class="text-gray-600 mb-4">Curso ensinando como você pode se tornar nosso sócio e começar a ganhar dinheiro revendendo nossa ferramenta.</p>
+                    <div class="text-emerald-500">
+                        <i class="fas fa-gem mr-2"></i> Valor: R$ 297,00
+                    </div>
+                </div>
+
+                <!-- Bonus 2 -->
+                <div class="bg-gray-50 p-6 rounded-xl border border-emerald-100">
+                    <h3 class="text-xl font-bold text-emerald-600 mb-3">GRUPO VIP DE USUÁRIOS</h3>
+                    <p class="text-gray-600 mb-4">Participe da maior comunidade de network de usuários da ferramenta, trocando ideias e estratégias para aumentar ainda mais suas vendas.</p>
+                    <div class="text-emerald-500">
+                        <i class="fas fa-users mr-2"></i> Valor: R$ 197,00
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Perguntas <span class="text-emerald-600">Frequentes</span></h2>
+                <p class="text-gray-600">Tire suas dúvidas sobre o Zap Turbo Max</p>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="faq-question p-6 flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-semibold">Preciso ter conhecimento técnico para usar?</h3>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600 text-lg">
+                            Não! O Zap Turbo Max foi desenvolvido para ser extremamente simples de usar. Nossa interface é amigável e oferecemos templates prontos para você só copiar e colar. Além disso, temos tutoriais passo a passo e suporte disponível para te ajudar com qualquer dúvida.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="faq-question p-6 flex justify-between items-center cursor-pointer">
+                        <h3 class="text-lg font-semibold">Funciona com meu número pessoal do WhatsApp?</h3>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600">
+                            Sim, funciona perfeitamente! Você pode usar tanto com seu número pessoal quanto com um número comercial. Basta realizar o cadastro normalmente e vincular seu WhatsApp à plataforma seguindo os passos simples que fornecemos.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="faq-question p-6 flex justify-between items-center cursor-pointer">
+                        <h3 class="text-lg font-semibold">Como recebo o acesso após a compra?</h3>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600">
+                            O acesso é imediato! Após a confirmação do pagamento, você recebe um e-mail com seus dados de login e todos os passos para começar a usar o sistema. Não precisa instalar nada - basta acessar pelo navegador do seu computador ou celular.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="faq-item bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="faq-question p-6 flex justify-between items-center cursor-pointer">
+                        <h3 class="text-lg font-semibold">Posso usar para mais de um número de WhatsApp?</h3>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600">
+                            Sim, oferecemos planos que permitem conectar múltiplos números de WhatsApp. Você pode gerenciar todas as contas através de um único painel, tornando muito mais fácil escalar seu negócio.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="faq-item bg-gray-50 rounded-lg overflow-hidden">
+                    <div class="faq-question p-6 flex justify-between items-center cursor-pointer">
+                        <h3 class="text-lg font-semibold">Há risco do WhatsApp banir minha conta?</h3>
+                        <i class="fas fa-chevron-down text-emerald-600 transition-transform duration-300"></i>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600">
+                            Não! Nossa plataforma segue todas as diretrizes do WhatsApp Business API. Operamos dentro dos limites de mensagens permitidas e implementamos mecanismos de segurança para garantir que seu número não seja bloqueado, diferentemente de algumas soluções caseiras.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-600 mb-4">Ainda com dúvidas?</p>
+                <a href="#" class="inline-flex items-center px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition">
+                    <i class="fab fa-whatsapp mr-2"></i> Fale com nosso suporte via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fab fa-whatsapp text-3xl text-green-400"></i>
+                        <h2 class="text-xl font-bold">Zap Turbo <span class="text-emerald-400">Max</span></h2>
+                    </div>
+                    <p class="text-gray-400 mb-4">Desenvolvido para facilitar a vida de quem precisa vender todos os dias, com tecnologia que simula atendimento humano e transforma leads em vendas com apenas alguns cliques.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Produto</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Recursos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Preços</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Suporte</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Central de Ajuda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Tutoriais</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contato</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Status</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Cookies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Garantia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>© 2023 Zap Turbo Max. Todos os direitos reservados.</p>
+                <p class="mt-2">Zap Turbo Max não é afiliado ao WhatsApp ou ao Facebook.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating CTA (Mobile) -->
+    <div class="floating-cta md:hidden">
+        <a href="#offer" class="flex items-center justify-center w-16 h-16 rounded-full bg-emerald-600 text-white text-xl shadow-lg">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                // Toggle active class on answer
+                answer.classList.toggle('active');
+                
+                // Toggle icon rotation
+                if (answer.classList.contains('active')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
